@@ -77,12 +77,6 @@ We welcome contributions from the ETH Entrepreneur Club community! If you'd like
 3. Make your changes and test them thoroughly.
 4. Submit a pull request to the main repository's `main` branch.
 
-For more details on contributing, please check out our [Contributing Guidelines](CONTRIBUTING.md).
-
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-We hope that ImageCheckEC helps you with your image manipulation tasks for the ETH Entrepreneur Club. If you encounter any issues or have suggestions for improvements, please don't hesitate to [open an issue](https://github.com/eth-entrepreneur-club/ImageCheckEC/issues) on our GitHub repository.
