@@ -53,17 +53,17 @@ ImageCheckEC provides two main modes for image manipulation: `logo` and `face`. 
 To center and make logos transparent, use the following command:
 
 ```shell
-python run.py -m logo
+python run.py -m logo -f ./my-logo-images/
 ```
 
 This mode is useful for adjusting logos to meet the specific design requirements of the ETH Entrepreneur Club.
 
 ### Centering Faces
 
-For website or presentation purposes, you can center faces in images using the following command:
+For website or presentation purposes (crops an area around the first face it sees in the photo), you can center faces in images using the following command:
 
 ```shell
-python run.py -m face
+python run.py -m face -f ./my-face-images/
 ```
 
 This mode helps ensure that faces are properly centered, making your images more aesthetically pleasing.
