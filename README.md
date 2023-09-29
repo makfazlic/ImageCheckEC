@@ -27,7 +27,7 @@ Before you begin, ensure you have met the following requirements:
 1. Clone the ImageCheckEC repository to your local machine:
 
    ```shell
-   git clone https://github.com/eth-entrepreneur-club/ImageCheckEC.git
+   git clone https://github.com/makfazlic/ImageCheckEC.git
    ```
 
 2. Navigate to the project directory:
