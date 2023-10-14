@@ -37,7 +37,13 @@ Before you begin, ensure you have met the following requirements:
    cd ImageCheckEC
    ```
 
-3. Install the required Python packages using pip:
+3. Make the Python environment for this project:
+
+   ```shell
+   python3 -m venv imagecheckec_env
+   ```
+
+4. Install the required Python packages using pip:
 
    ```shell
    pip install -r requirements.txt
@@ -49,32 +55,22 @@ Now, you're ready to start using ImageCheckEC!
 
 ImageCheckEC provides two main modes for image manipulation: `logo` and `face`. Depending on your requirements, you can use the following commands:
 
-### Cropping and Adjusting Logos
+### Processing images from a Folder
 
-To center and make logos transparent, use the following command:
-
-```shell
-python run.py -m logo -f ./my-logo-images/
-```
-
-This mode is useful for adjusting logos to meet the specific design requirements of the ETH Entrepreneur Club.
-
-### Centering Faces
-
-For website or presentation purposes (crops an area around the first face it sees in the photo), you can center faces in images using the following command:
+For website or presentation purposes, you can process face images using the following command where `-f` takes as input a folder location and `-s` is size e.g. 500 to make the face images 500x500. Other ratios are not possible. If the `-s` is not included 512 is the default value.
 
 ```shell
-python run.py -m face -f ./my-face-images/
+python run.py -m face -f ./my-face-images/ -s 500
 ```
 
-This mode helps ensure that faces are properly centered, making your images more aesthetically pleasing.
+The outputed faces are properly centered and 500x500, while being in webp format. This makes images more suitable for websites.
 
 ### Processing Images from CSV
 
 You can also process images from a CSV file. Use the following command, where `-c` is for a CSV file and `-i` is the index of a column that contains images, counting from 0:
 
 ```shell
-python run.py -m face -c my-csv-file.csv -i 10
+python run.py -m face -c my-csv-file.csv -i 10 -s 300
 ```
 
 This command will process images from the specified CSV file, centering faces in the images listed in the specified column.
