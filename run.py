@@ -1,7 +1,6 @@
 import argparse
 import os
 import tqdm as tqdm
-from PIL import Image
 import warnings
 
 # Helper functions
