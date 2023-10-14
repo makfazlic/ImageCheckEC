@@ -10,6 +10,7 @@ ImageCheckEC is an internal project of the ETH Entrepreneur Club that focuses on
 - [Usage](#usage)
   - [Cropping and Adjusting Logos](#cropping-and-adjusting-logos)
   - [Centering Faces](#centering-faces)
+  - [Processing Images from CSV](#processing-images-from-csv)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -67,6 +68,16 @@ python run.py -m face -f ./my-face-images/
 ```
 
 This mode helps ensure that faces are properly centered, making your images more aesthetically pleasing.
+
+### Processing Images from CSV
+
+You can also process images from a CSV file. Use the following command, where `-c` is for a CSV file and `-i` is the index of a column that contains images, counting from 0:
+
+```shell
+python run.py -m face -c my-csv-file.csv -i 10
+```
+
+This command will process images from the specified CSV file, centering faces in the images listed in the specified column.
 
 ## Contributing
 
