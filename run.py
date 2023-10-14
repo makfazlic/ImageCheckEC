@@ -22,7 +22,7 @@ else:
     print(f'Output folder "{out_folder}" already exists. Delete it or rename it and try again.')
     exit()
 
-# Face crop main branch
+# Face crop
 if mode == 'face':
     print('=== Running face mode on {} images ==='.format(len(images)))
     for image in tqdm.tqdm(images):
@@ -52,6 +52,6 @@ if mode == 'face':
             break
 
 
-# Logo detection main branch
+# Logo detection
 if mode == 'logo':
     print('Running logo mode on {} images'.format(len(images)))
