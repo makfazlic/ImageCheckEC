@@ -125,7 +125,8 @@ if mode == 'face':
     print('COMPLETED FACE MODE ON {} IMAGES'.format(images_completed))
     print('Initial size: {} MB'.format(round(init_size / 1024 / 1024, 2)))
     print('Final size: {} MB'.format(round(final_size / 1024 / 1024, 2)))
-    print('🏆 Total size saved: {} MB'.format(round((init_size - final_size) / 1024 / 1024, 2)))
+    change = abs(((final_size - init_size) / init_size) * 100)
+    print('🏆 Total size saved: {} MB ({}%)'.format(round((init_size - final_size) / 1024 / 1024, 2), round(change, 2)))
     if images_completed != len(images):
         print('Some images were not processed. Check the output folder!!!')
 
