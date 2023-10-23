@@ -134,3 +134,22 @@ if mode == 'face':
 # Logo detection
 if mode == 'logo':
     print('Running logo mode on {} images'.format(len(images)))
+    for i, image in enumerate(images):
+        print("START {} ------------ (image {})".format(str(i), image))
+        # Crop the image
+        resized = helper.resize_image(folder + '/' + image, width_in, height_in)
+        if resized is None:
+            print()
+            continue
+
+        transparent = helper.remove_bg(resized, out_folder)
+        if transparent is None:
+            print()
+            continue
+
+
+
+
+        
+        print("END {} (image {})".format(str(i), image))
+    

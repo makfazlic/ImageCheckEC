@@ -8,6 +8,9 @@ from PIL import Image
 import pillow_heif
 from io import BytesIO
 import warnings
+import fitz
+from rembg import remove as remove_me
+import numpy as np
 
 # Ignore warnings (Because I like to live dangerously, and they are extremely annoying. Sue me.)
 warnings.filterwarnings("ignore")
@@ -21,6 +24,8 @@ def extract_from_csv(csv_file, column):
         reader = csv.reader(f)
         your_list = list(reader)
         # show the number of rows in the csv file
+        # print the column name
+        print('📝 Column name: {}'.format(your_list[0][column]))
         print('📝 {} rows in the csv file'.format(len(your_list)-1))
         print
         image_array = [row[column] for row in your_list[1:]]
@@ -45,12 +50,19 @@ def fix_heif_and_apple_trying_to_be_smart(image):
 def fetch_images(image_urls, folder):
     print('Fetching {} images... (The whole of selected column)'.format(len(image_urls)))
     for i, image_url in enumerate(image_urls):
+
         try:
             r = requests.get(image_url, allow_redirects=True)
             if r.status_code == 200:
                 # save image
                 extension = image_url.split('.')[-1]
                 open(folder + '/' + str(i) + "." + extension, 'wb').write(r.content)
+
+                if extension.lower() == 'pdf':
+                    print("🔧 running a module to fix a pdf image")
+                    # try to fix pdf images
+                    fixed_image = fix_pdf(folder + '/' + str(i) + "." + extension)
+                    extension = fixed_image.split('.')[-1]
                 if extension.lower() == 'heic':
                     print("🔧 running a module to fix a HEIC image")
                     # try to fix heic images
@@ -124,3 +136,39 @@ def convert_to_webp(image):
 
 def size_of_file(file):
     return os.stat(file).st_size
+
+# Because some people upload pdfs when asked for a photo. Everyone knows a pdf is a photo. Save as png.
+def fix_pdf(image_path):
+    if image_path.split('.')[-1] != 'pdf':
+        return image_path
+    doc = fitz.open(image_path)
+    page = doc.load_page(0)
+    pix = page.get_pixmap()
+    output = image_path.replace('.pdf', '.png')
+    pix.pil_save(output)
+    os.remove(image_path)
+    return output
+
+def remove_bg(image_path, output_path):
+    print('🔧 Removing background from image {}'.format(image_path))
+    try:
+        image = Image.open(image_path)
+        
+        image = np.array(image)
+        output = remove_me(image)
+        output = Image.fromarray(output)
+        output = output.convert("RGBA")
+        file_name = image_path.split('/')[-1]
+        output_path = output_path + '/' + file_name
+
+
+        output.save(output_path)
+
+        os.remove(image_path)
+        print('✅ Removed background from image {}'.format(image_path))
+        return output_path
+    except Exception as e:
+
+        print("🚫 Error: {}".format(e))
+        print('🚫 Failed to remove background from image {}'.format(image_path))
+        return image_path
